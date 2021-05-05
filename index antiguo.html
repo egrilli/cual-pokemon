@@ -23,14 +23,20 @@
     }
 
     $(".poke").on("click", function () {
+      $("#pokedex").empty();
       const id = $(this).attr("id");
       $.get(`https://pokeapi.co/api/v2/pokemon/${id}`, function (data) {
         console.log(id);
-        $("#pokedex").html(`<h1 class="text-center py-3">Pokedex </h1> <br> <h4>Tu pokemon es : ${data.name} y su id es ${data.id} <br> Mide : ${data.height} metros <br> Pesa : ${data.weight} kg <br>
-          Tu pokemon es de tipo : </h4>`)
+        $("#pokedex").append(`<h1 class="text-center py-3">Pokedex </h1>`)
+        $("#pokedex").append(`<h4>Tu pokemon es : ${data.name} y su id es ${data.id}: </h4>`)
+        $("#pokedex").append(`<h4>Mide : ${data.height} metros</h4>`)
+        $("#pokedex").append(`<h4>Pesa : ${data.weight} kg </h4>`)
+
+        $("#pokedex").append(`<h4> Tu pokemon es de tipo :</h4>`)
         for (var i = 0; i < data.types.length; i++) {
           $("#pokedex").append(`<ul class="mx-4"><li> <h4> ${data.types[i].type.name}</h4></li><ul>`)
         }
+
         $("#pokedex").append(`<div><img class="rounded mx-auto d-block" width="250px" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${id}.png"></div>`);
 
       });
@@ -61,11 +67,6 @@
     border: blue 1px solid;
 
   }
-
-
-
-
-
 </style>
 
 
@@ -84,7 +85,7 @@
       </div>
 
       <div class=" col-4">
-        <div class="row mx-4 " id="pokedex">
+        <div class="row mx-4" id="pokedex">
         </div>
       </div>
 
